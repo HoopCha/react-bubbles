@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import styled from 'styled-components'
 
+
+const Input = styled.input`
+margin: 0px auto;
+margin-bottom: 10px;
+`
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: center;
+margin: 0px;
+`
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
 const ColorList = ({ colors, updateColors }) => {
+
   console.log(colors);
+
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [color, setColor] = useState(initialColor)
+
 
   const editColor = color => {
     setEditing(true);
@@ -58,7 +73,7 @@ const submitColor = event => {
 
   return (
     <div className="colors-wrap">
-      <p>colors</p>
+      <h2>Colors</h2>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -110,9 +125,9 @@ const submitColor = event => {
         </form>
       )}
       <div>
-                <h1>Add New Color</h1>
-                <form onSubmit={submitColor}>
-                    <input 
+                <h2>Add New Color</h2>
+                <Form onSubmit={submitColor}>
+                    <Input 
                     type="text"
                     name="color"
                     value={color.color}
@@ -122,7 +137,7 @@ const submitColor = event => {
                     }
                     placeholder='Color'
                     />
-                    <input 
+                    <Input 
                     type="text"
                     name="code"
                     value={color.code.hex}
@@ -135,7 +150,7 @@ const submitColor = event => {
                     placeholder='Code'
                     />
                     <button>Add</button>
-                </form>
+                </Form>
             </div>
     </div>
   );
